@@ -3,8 +3,7 @@ looker.plugins.visualizations.add({
     html_template: {
       type: "string",
       label: "HTML Template",
-      default: `<div>{{ value }}</div>`,
-      display: "input"
+      default: `<div>{{ value }}</div>`
     }
   },
  
