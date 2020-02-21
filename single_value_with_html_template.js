@@ -3,7 +3,7 @@ looker.plugins.visualizations.add({
     html_template: {
       type: "string",
       label: "HTML Template",
-      default: `<div>{{ value }}</div>`
+      default: `<div style="text-align: center; color: #282828; font-family: 'Open Sans'; font-size: 5rem; font-weight: 700;">{{ value }}</div>`
     }
   },
  
@@ -13,11 +13,11 @@ looker.plugins.visualizations.add({
     this.clearErrors();
     
     const firstRow = data[0];
-    const firstCell = firstRow[queryResponse.fields.dimensions[0].name];
+    const firstCell = firstRow[queryResponse.fields.dimensions[0].name || queryResponse.fields.measure_like[0]];
     const htmlForCell = LookerCharts.Utils.htmlForCell(firstCell);
     const htmlTemplate = config && config.html_template || this.options.html_template.default;
-
     const htmlFormatted = htmlTemplate.replace(/{{.*}}/g, htmlForCell);
+
     element.innerHTML = htmlFormatted;
     
     doneRendering();
