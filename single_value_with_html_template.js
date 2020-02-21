@@ -13,7 +13,9 @@ looker.plugins.visualizations.add({
     this.clearErrors();
     
     const firstRow = data[0];
-    const firstCell = firstRow[queryResponse.fields.dimensions[0].name || queryResponse.fields.measure_like[0]];
+    const firstDimension = firstRow[queryResponse.fields.dimensions[0].name];
+    const firstMeasure = firstRow[queryResponse.fields.measure_like[0].name];
+    const firstCell = firstDimension ? firstDimension : firstMeasure;
     const htmlForCell = LookerCharts.Utils.htmlForCell(firstCell);
     const htmlTemplate = config && config.html_template || this.options.html_template.default;
     const htmlFormatted = htmlTemplate.replace(/{{.*}}/g, htmlForCell);
