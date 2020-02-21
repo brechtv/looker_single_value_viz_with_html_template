@@ -27,13 +27,6 @@ looker.plugins.visualizations.add({
 
         const htmlForCell = LookerCharts.Utils.filterableValueForCell(firstCell);
         const htmlTemplate = config && config.html_template || this.options.html_template.default;
-        
-        if (!htmlTemplate || htmlTemplate === "") {
-            this.addError({
-                title: `HTML template is missing`,
-                message: `Add some HTML into the visualisation settings.`
-            })
-        }
 
         const htmlFormatted = htmlTemplate.replace(/{{.*}}/g, htmlForCell);
 
