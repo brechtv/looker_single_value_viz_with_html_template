@@ -30,6 +30,7 @@ looker.plugins.visualizations.add({
             console.log(firstRowFields[field].name);
             const columnIndex = parseInt(field) + 1;
             const columnRef = `column_${columnIndex}`;
+            const columnRexExpSingleVal = new RegExp("{{ *value  *}}", "g");
             const columnRexExpNumeric = new RegExp("{{ *" + columnRef + "  *}}", "g");
             const columnRexExpByRef = new RegExp("{{ *" + firstRowFields[field].name + "  *}}", "g");
             const columnValue = LookerCharts.Utils.filterableValueForCell(firstRow[firstRowFields[field].name]);
