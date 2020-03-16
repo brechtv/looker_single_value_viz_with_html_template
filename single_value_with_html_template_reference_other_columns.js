@@ -3,7 +3,7 @@ looker.plugins.visualizations.add({
         html_template: {
             type: "string",
             label: "HTML Template",
-            default: `<div style="text-align: center; color: #5A2FC2; font-family: 'Open Sans'; font-size: 5rem; font-weight: 700;">{{ value }}, {{ column_2._value }}</div>`
+            default: `<div style="text-align: center; color: #5A2FC2; font-family: 'Open Sans'; font-size: 5rem; font-weight: 700;">{{ value }}</div>`
         }
     },
 
