@@ -3,7 +3,7 @@ looker.plugins.visualizations.add({
         html_template: {
             type: "string",
             label: "HTML Template",
-            default: `<div style="text-align: center; color: #5A2FC2; font-family: 'Open Sans'; font-size: 5rem; font-weight: 700;">{{ value }}</div>`
+            default: `<div style="text-align: center; color: #5A2FC2; font-family: 'Open Sans'; font-size: 5rem; font-weight: 700;">{{ value }}, {{ column_2._value }}</div>`
         }
     },
 
@@ -27,11 +27,16 @@ looker.plugins.visualizations.add({
 
         const firstRowFields = qFields.dimension_like.concat(qFields.measure_like);
         for(field in firstRowFields) {
+            console.log(firstRowFields[field].name);
             const columnIndex = parseInt(field) + 1;
-            const columnRef = columnIndex === 1 ? `value` : `column_${columnIndex}._value`;
-            const columnRexExp = new RegExp("{{( {0,})" + columnRef + " ( {0,})}}", "g");
+            const columnRef = `column_${columnIndex}`;
+            const columnRexExpNumeric = new RegExp("{{ *" + columnRef + "  *}}", "g");
+            const columnRexExpByRef = new RegExp("{{ *" + firstRowFields[field].name + "  *}}", "g");
             const columnValue = LookerCharts.Utils.filterableValueForCell(firstRow[firstRowFields[field].name]);
-            htmlTemplate = htmlTemplate.replace(columnRexExp, columnValue);
+            console.log(columnIndex, columnRef, columnRexExpNumeric, columnRexExpByRef, columnValue)
+            
+            htmlTemplate = htmlTemplate.replace(columnRexExpNumeric, columnValue);
+            htmlTemplate = htmlTemplate.replace(columnRexExpByRef, columnValue);
         }
 
         element.innerHTML = htmlTemplate;
