@@ -27,7 +27,6 @@ looker.plugins.visualizations.add({
 
         const firstRowFields = qFields.dimension_like.concat(qFields.measure_like);
         for(field in firstRowFields) {
-            console.log(firstRowFields[field].name);
             const columnIndex = parseInt(field) + 1;
             const columnRef = `column_${columnIndex}`;
             const columnRexExpSingleVal = new RegExp("{{( *)value ( *)}}", "g");
